@@ -1,0 +1,46 @@
+# Dependencies
+node_modules
+.pnpm-store/
+
+# Build output
+dist
+.output
+.nuxt
+.nitro
+.cache
+build
+
+# Testing
+/coverage
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Turborepo
+.turbo
+
+# VitePress
+cache
+.temp
+
+# TypeScript
+*.tsbuildinfo
+
+# Vite
+*.local
