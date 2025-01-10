@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Vue Tweet Pure</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script
+      lang="ts"
+      type="module"
+    >
+      import { createApp, defineComponent, h } from 'vue'
+      import { Tweet } from './src'
+
+      const app = defineComponent({
+        setup() {
+          return () => h(Tweet, { id: '1877312427370381374' })
+        },
+      })
+
+      createApp(app).mount('#app')
+    </script>
+  </body>
+</html>
