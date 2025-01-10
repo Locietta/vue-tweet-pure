@@ -13,7 +13,8 @@
     "vue3",
     "tweet",
     "twitter",
-    "embed"
+    "embed",
+    "vue-tweet"
   ],
   "type": "module",
   "files": [
@@ -21,9 +22,9 @@
   ],
   "main": "./dist/vue-tweet-pure.umd.cjs",
   "module": "./dist/vue-tweet-pure.es.js",
-  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/vue-tweet-pure.es.js",
       "require": "./dist/vue-tweet-pure.umd.cjs"
     },
