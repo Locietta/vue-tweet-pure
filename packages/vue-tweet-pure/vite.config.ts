@@ -24,7 +24,6 @@ export default defineConfig({
         },
       },
     },
-    sourcemap: true,
     cssMinify: 'lightningcss',
   },
 })
