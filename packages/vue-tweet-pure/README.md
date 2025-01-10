@@ -2,6 +2,8 @@
 
 A Vue 3 component for embedding tweets in your Vue.js applications. This is a Vue port of [react-tweet](https://github.com/vercel/react-tweet).
 
+> Server component support is not implemented yet.
+
 ## Features
 
 - 🚀 Fast loading - SSR-ready, no external scripts or iframes
