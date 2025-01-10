@@ -44,3 +44,6 @@ cache
 
 # Vite
 *.local
+
+# ESLint
+.eslintcache
