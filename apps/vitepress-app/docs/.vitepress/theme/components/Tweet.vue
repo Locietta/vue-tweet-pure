@@ -1,11 +1,7 @@
 <!-- Simple Warpper for vue-tweet-pure -->
 <template>
-  <div class="tweet-container">
-    <VueTweetPure :id="resolvedId">
-      <template #node:fallback>
-        <div style="font-weight: bold">[[Error Occurred When Loading Tweet!]]</div>
-      </template>
-    </VueTweetPure>
+  <div class="tweet-container vp-raw">
+    <VueTweetPure :id="resolvedId" />
   </div>
 </template>
 <script lang="ts" setup>
