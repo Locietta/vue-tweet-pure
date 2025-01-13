@@ -20,13 +20,18 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/vue-tweet-pure.umd.cjs",
+  "main": "./dist/vue-tweet-pure.cjs.js",
   "module": "./dist/vue-tweet-pure.es.js",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/vue-tweet-pure.es.js",
-      "require": "./dist/vue-tweet-pure.umd.cjs"
+      "require": "./dist/vue-tweet-pure.cjs.js"
+    },
+    "./api": {
+      "types": "./dist/api/index.d.ts",
+      "import": "./dist/api.es.js",
+      "require": "./dist/api.cjs.js"
     },
     "./style.css": "./dist/vue-tweet-pure.css"
   },

@@ -1,9 +1,9 @@
-import { defineConfig } from 'vite'
+import { type UserConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 import { fileURLToPath, URL } from 'url'
 
-export default defineConfig({
+export default {
   plugins: [vue()],
   resolve: {
     alias: {
@@ -12,9 +12,12 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
+      entry: {
+        'vue-tweet-pure': resolve(__dirname, 'src/index.ts'),
+        api: resolve(__dirname, 'src/api/index.ts'),
+      },
       name: 'VueTweetPure',
-      fileName: (format) => `vue-tweet-pure.${format}.js`,
+      fileName: (format, entryName) => `${entryName}.${format}.js`,
     },
     rollupOptions: {
       external: ['vue'],
@@ -26,4 +29,4 @@ export default defineConfig({
     },
     cssMinify: 'lightningcss',
   },
-})
+} satisfies UserConfig
