@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { EnrichedTweet } from '../utils'
-import type { TwitterComponents } from './types'
+import type { TwitterComponents } from './default-theme'
 import AvatarImg from './avatar-img.vue'
 import VerifiedBadge from './verified-badge.vue'
 

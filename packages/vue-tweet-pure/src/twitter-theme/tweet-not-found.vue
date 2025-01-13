@@ -2,7 +2,7 @@
 import TweetContainer from './tweet-container.vue'
 
 interface Props {
-  error?: unknown
+  error: Error | null
 }
 
 defineProps<Props>()

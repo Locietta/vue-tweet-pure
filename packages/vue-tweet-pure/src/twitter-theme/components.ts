@@ -1,4 +1,4 @@
-export * from './types'
+export * from './default-theme'
 export * from './icons'
 export * from './quoted-tweet'
 export { default as EmbeddedTweet } from './embedded-tweet.vue'

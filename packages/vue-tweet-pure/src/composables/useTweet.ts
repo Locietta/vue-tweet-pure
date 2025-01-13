@@ -2,8 +2,6 @@ import { ref, onMounted } from 'vue'
 import type { Tweet } from '../api'
 import { TwitterApiError } from '../api'
 
-const host = 'https://react-tweet.vercel.app'
-
 async function fetcher(url: string, fetchOptions?: RequestInit): Promise<Tweet | null> {
   const res = await fetch(url, fetchOptions)
   const json = await res.json()
@@ -17,7 +15,7 @@ async function fetcher(url: string, fetchOptions?: RequestInit): Promise<Tweet |
   })
 }
 
-export function useTweet(id?: string, apiUrl?: string, fetchOptions?: RequestInit) {
+export function useTweet(id: string, apiUrl: string, fetchOptions?: RequestInit) {
   const isLoading = ref(true)
   const data = ref<Tweet | null>()
   const error = ref<Error | null>(null)
@@ -29,7 +27,7 @@ export function useTweet(id?: string, apiUrl?: string, fetchOptions?: RequestIni
     }
 
     try {
-      const url = apiUrl || `${host}/api/tweet/${id}`
+      const url = `${apiUrl}/${id}`
       const result = await fetcher(url, fetchOptions)
       data.value = result
     } catch (err) {

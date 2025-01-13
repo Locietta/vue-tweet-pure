@@ -15,7 +15,7 @@ import type {
 
 export type TweetCoreProps = {
   id: string
-  onError?(error: unknown): unknown
+  onError?(error: Error | null): Error | null
 }
 
 const getTweetUrl = (tweet: TweetBase) =>

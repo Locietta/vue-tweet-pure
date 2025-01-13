@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Tweet } from '../api'
-import type { TwitterComponents } from './types'
+import type { TwitterComponents } from './default-theme'
 import TweetContainer from './tweet-container.vue'
 import TweetHeader from './tweet-header.vue'
 import TweetInReplyTo from './tweet-in-reply-to.vue'

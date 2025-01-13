@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { type EnrichedTweet, type EnrichedQuotedTweet, getMediaUrl } from '../utils'
 import { type MediaDetails } from '../api'
-import type { TwitterComponents } from './types'
+import type { TwitterComponents } from './default-theme'
 import TweetMediaVideo from './tweet-media-video.vue'
 import MediaImg from './media-img.vue'
 import { computed } from 'vue'
