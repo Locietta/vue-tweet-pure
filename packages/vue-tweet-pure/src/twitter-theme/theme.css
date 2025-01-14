@@ -68,8 +68,11 @@
   box-sizing: border-box;
 }
 
-:is([data-theme='light'], .light) :where(.vue-tweet-theme),
 :where(.vue-tweet-theme) {
+  color-scheme: light dark;
+}
+
+:is([data-theme='light'], .light) :where(.vue-tweet-theme) {
   color-scheme: light;
 }
 
