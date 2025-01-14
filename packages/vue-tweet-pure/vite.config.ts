@@ -29,4 +29,10 @@ export default {
     },
     cssMinify: 'lightningcss',
   },
+  css: {
+    transformer: 'lightningcss',
+    lightningcss: {
+      cssModules: true,
+    },
+  },
 } satisfies UserConfig
