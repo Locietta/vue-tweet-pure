@@ -9,6 +9,7 @@ permissions:
   contents: write
   pull-requests: write
   actions: write
+  id-token: write
 
 env:
   FORCE_COLOR: 3
@@ -22,13 +23,13 @@ jobs:
       - uses: actions/checkout@main
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@master
         # version already set by "packageManager" in package.json
 
       - name: Setup Node.js
         uses: actions/setup-node@main
         with:
-          node-version: 22
+          node-version: 24
           cache: pnpm
 
       - name: Install dependencies
@@ -44,7 +45,6 @@ jobs:
           title: 'chore: update package versions'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Send a Slack notification if a publish happens
         if: steps.changesets.outputs.published == 'true'
