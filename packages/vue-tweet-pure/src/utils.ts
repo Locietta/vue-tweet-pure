@@ -11,6 +11,7 @@ import type {
   MediaEntity,
   MediaAnimatedGif,
   MediaVideo,
+  VideoInfo,
 } from './api'
 
 export type TweetCoreProps = {
@@ -62,7 +63,9 @@ export const getMp4Videos = (media: MediaAnimatedGif | MediaVideo) => {
   return sortedMp4Videos
 }
 
-export const getMp4Video = (media: MediaAnimatedGif | MediaVideo) => {
+export const getMp4Video = (
+  media: MediaAnimatedGif | MediaVideo,
+): VideoInfo['variants'][number] | undefined => {
   const mp4Videos = getMp4Videos(media)
   // Skip the highest quality video and use the next quality
   return mp4Videos.length > 1 ? mp4Videos[1] : mp4Videos[0]

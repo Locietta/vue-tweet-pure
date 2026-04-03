@@ -13,7 +13,7 @@ const props = defineProps<Props>()
 const playButton = ref(true)
 const isPlaying = ref(false)
 const ended = ref(false)
-const mp4Video = getMp4Video(props.media)!
+const mp4Video = getMp4Video(props.media)
 let timeout = 0
 
 const handlePlay = () => {
@@ -42,64 +42,66 @@ const handleVideoButtonClick = (e: Event) => {
 </script>
 
 <template>
-  <video
-    :class="mediaStyles.image"
-    :poster="getMediaUrl(media, 'small')"
-    :controls="!playButton"
-    muted
-    preload="none"
-    :tabindex="playButton ? -1 : 0"
-    @play="handlePlay"
-    @pause="handlePause"
-    @ended="ended = true"
-  >
-    <source
-      :src="mp4Video.url"
-      :type="mp4Video.content_type"
-    />
-  </video>
-
-  <button
-    v-if="playButton"
-    type="button"
-    :class="$style.videoButton"
-    aria-label="View video on X"
-    @click="handleVideoButtonClick"
-  >
-    <svg
-      viewBox="0 0 24 24"
-      :class="$style.videoButtonIcon"
-      aria-hidden="true"
+  <template v-if="mp4Video">
+    <video
+      :class="mediaStyles.image"
+      :poster="getMediaUrl(media, 'small')"
+      :controls="!playButton"
+      muted
+      preload="none"
+      :tabindex="playButton ? -1 : 0"
+      @play="handlePlay"
+      @pause="handlePause"
+      @ended="ended = true"
     >
-      <g>
-        <path d="M21 12L4 2v20l17-10z" />
-      </g>
-    </svg>
-  </button>
+      <source
+        :src="mp4Video.url"
+        :type="mp4Video.content_type"
+      />
+    </video>
 
-  <div
-    v-if="!isPlaying && !ended"
-    :class="$style.watchOnTwitter"
-  >
+    <button
+      v-if="playButton"
+      type="button"
+      :class="$style.videoButton"
+      aria-label="View video on X"
+      @click="handleVideoButtonClick"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        :class="$style.videoButtonIcon"
+        aria-hidden="true"
+      >
+        <g>
+          <path d="M21 12L4 2v20l17-10z" />
+        </g>
+      </svg>
+    </button>
+
+    <div
+      v-if="!isPlaying && !ended"
+      :class="$style.watchOnTwitter"
+    >
+      <a
+        :href="tweet.url"
+        :class="$style.anchor"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {{ playButton ? 'Watch on X' : 'Continue watching on X' }}
+      </a>
+    </div>
+
     <a
+      v-if="ended"
       :href="tweet.url"
-      :class="$style.anchor"
+      :class="[$style.anchor, $style.viewReplies]"
       target="_blank"
       rel="noopener noreferrer"
     >
-      {{ playButton ? 'Watch on X' : 'Continue watching on X' }}
+      View replies
     </a>
-  </div>
-
-  <a
-    v-if="ended"
-    :href="tweet.url"
-    :class="[$style.anchor, $style.viewReplies]"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    View replies
-  </a>
+  </template>
 </template>
 <style module>
 .anchor {
