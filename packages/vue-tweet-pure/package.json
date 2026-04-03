@@ -1,9 +1,9 @@
 {
   "name": "vue-tweet-pure",
   "version": "0.3.0",
-  "repository": "https://github.com/locietta/vue-tweet-pure.git",
+  "repository": "https://github.com/Locietta/vue-tweet-pure",
   "bugs": {
-    "url": "https://github.com/locietta/vue-tweet-pure/issues"
+    "url": "https://github.com/Locietta/vue-tweet-pure/issues"
   },
   "author": "Locietta <locietta@qq.com>",
   "license": "MIT",

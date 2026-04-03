@@ -23,7 +23,7 @@ jobs:
       - uses: actions/checkout@main
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@master
+        uses: pnpm/action-setup@v5
         # version already set by "packageManager" in package.json
 
       - name: Setup Node.js
