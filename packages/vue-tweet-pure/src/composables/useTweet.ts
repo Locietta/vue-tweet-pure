@@ -15,6 +15,26 @@ async function fetcher(url: string, fetchOptions?: RequestInit): Promise<Tweet |
   })
 }
 
+const cache = new Map<string, Promise<Tweet | null>>()
+
+/** @internal */
+export function clearCache() {
+  cache.clear()
+}
+
+/** @internal */
+export function cachedFetcher(url: string, fetchOptions?: RequestInit): Promise<Tweet | null> {
+  const cached = cache.get(url)
+  if (cached) return cached
+
+  const promise = fetcher(url, fetchOptions).catch((err) => {
+    cache.delete(url)
+    throw err
+  })
+  cache.set(url, promise)
+  return promise
+}
+
 export function useTweet(id: string, apiUrl: string, fetchOptions?: RequestInit) {
   const isLoading = ref(true)
   const data = ref<Tweet | null>()
@@ -28,7 +48,7 @@ export function useTweet(id: string, apiUrl: string, fetchOptions?: RequestInit)
 
     try {
       const url = `${apiUrl}/${id}`
-      const result = await fetcher(url, fetchOptions)
+      const result = await cachedFetcher(url, fetchOptions)
       data.value = result
     } catch (err) {
       error.value = err as Error
