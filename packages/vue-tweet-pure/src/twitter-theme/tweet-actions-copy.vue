@@ -15,16 +15,18 @@ const handleCopy = () => {
   copied.value = true
 }
 
+let copyTimeout: ReturnType<typeof setTimeout> | undefined
+
 watch(copied, (newValue) => {
   if (newValue) {
-    const timeout = setTimeout(() => {
+    clearTimeout(copyTimeout)
+    copyTimeout = setTimeout(() => {
       copied.value = false
     }, 6000)
-
-    // Cleanup is automatically handled when component unmounts or when copied changes
-    onBeforeUnmount(() => clearTimeout(timeout))
   }
 })
+
+onBeforeUnmount(() => clearTimeout(copyTimeout))
 </script>
 
 <template>
