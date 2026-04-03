@@ -174,8 +174,9 @@ function addEntities(
  * Array.from is unicode aware, unlike string.slice()
  */
 function fixRange(tweet: TweetBase, entities: EntityWithType[]) {
-  if (tweet.entities.media && tweet.entities.media[0].indices[0] < tweet.display_text_range[1]) {
-    tweet.display_text_range[1] = tweet.entities.media[0].indices[0]
+  const firstMedia = tweet.entities.media?.[0]
+  if (firstMedia && firstMedia.indices[0] < tweet.display_text_range[1]) {
+    tweet.display_text_range[1] = firstMedia.indices[0]
   }
   const lastEntity = entities.at(-1)
   if (lastEntity && lastEntity.indices[1] > tweet.display_text_range[1]) {

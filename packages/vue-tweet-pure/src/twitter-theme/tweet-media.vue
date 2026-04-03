@@ -39,15 +39,13 @@ const Img = computed(() => props.components?.MediaImg ?? MediaImg)
 </script>
 
 <template>
-  <div :class="[s.root, { [s.rounded]: !quoted }]">
+  <div :class="[s.root, !quoted && s.rounded]">
     <div
       :class="[
         s.mediaWrapper,
-        {
-          [s.grid2Columns]: length > 1,
-          [s.grid3]: length === 3,
-          [s.grid2x2]: length > 4,
-        },
+        length > 1 && s.grid2Columns,
+        length === 3 && s.grid3,
+        length > 4 && s.grid2x2,
       ]"
     >
       <template

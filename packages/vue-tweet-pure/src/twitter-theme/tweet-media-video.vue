@@ -13,7 +13,7 @@ const props = defineProps<Props>()
 const playButton = ref(true)
 const isPlaying = ref(false)
 const ended = ref(false)
-const mp4Video = getMp4Video(props.media)
+const mp4Video = getMp4Video(props.media)!
 let timeout = 0
 
 const handlePlay = () => {
