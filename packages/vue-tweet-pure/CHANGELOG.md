@@ -1,5 +1,11 @@
 # vue-tweet-pure
 
+## 0.3.0
+
+### Minor Changes
+
+- 5cc30f8: Update dependencies, fixed a memory leak, add cache for tweet fetcher and introduce vitest
+
 ## 0.2.1
 
 ### Patch Changes
