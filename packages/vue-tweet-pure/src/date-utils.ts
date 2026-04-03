@@ -10,7 +10,7 @@ const options: Intl.DateTimeFormatOptions = {
   year: 'numeric',
 }
 
-const formatter = new Intl.DateTimeFormat('en-US', options)
+const formatter = new Intl.DateTimeFormat(navigator.language, options)
 
 const partsArrayToObject = (parts: ReturnType<typeof formatter.formatToParts>): PartsObject => {
   const result = {} as PartsObject
