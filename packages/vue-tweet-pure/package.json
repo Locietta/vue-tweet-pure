@@ -56,7 +56,7 @@
     "lightningcss": "^1.32.0",
     "typescript": "^6.0.2",
     "typescript-eslint": "^8.58.0",
-    "vite": "^8.0.3",
+    "vite": "^8.0.16",
     "vitest": "^4.1.2",
     "vue": "^3.5.32",
     "vue-eslint-parser": "^10.0.0",
