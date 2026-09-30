@@ -14,7 +14,7 @@ export default {
     // Run format and lint for affected packages only
     const commands = [`prettier --write ${files.join(' ')}`]
     if (packages.size > 0) {
-      commands.push(`pnpm lint --filter=${[...packages].join(',')} --parallel`)
+      commands.push(`pnpm lint --filter=${[...packages].join(',')}`)
     }
     return commands
   },
