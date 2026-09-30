@@ -37,7 +37,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "lint": "TIMING=1 eslint --cache --fix ./src/**/*.{ts,vue}",
+    "lint": "eslint --cache --fix ./src/**/*.{ts,vue}",
     "build": "vite build && pnpm build:types",
     "build:types": "vue-tsc --emitDeclarationOnly",
     "preview": "vite preview",
