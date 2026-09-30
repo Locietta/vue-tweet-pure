@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import { getMp4Video, getMp4Videos, formatNumber, getMediaUrl } from '../utils'
-import type { MediaVideo } from '../api'
+import { getMp4Video, getMp4Videos, formatNumber, getMediaUrl, enrichTweet } from '../utils'
+import type { MediaVideo, Tweet } from '../api'
 
 const makeMediaBase = () => ({
   display_url: 'pic.twitter.com/abc',
@@ -128,5 +128,49 @@ describe('getMediaUrl', () => {
     const url = getMediaUrl(media, 'large')
     const parsed = new URL(url)
     expect(parsed.searchParams.get('name')).toBe('large')
+  })
+})
+
+describe('enrichTweet', () => {
+  // shaped like a real syndication response: empty entity lists are omitted
+  const makeTweet = (entities?: object) =>
+    ({
+      id_str: '1668265685087076356',
+      text: 'Graphics Programming weekly - Issue 291 - June 11th 2023 https://t.co/iHrQbSQ9ql https://t.co/RVYpamUM4N',
+      display_text_range: [0, 80],
+      user: { screen_name: 'jendrikillner' },
+      entities,
+    }) as unknown as Tweet
+
+  it('handles entities without hashtags, mentions and symbols', () => {
+    const tweet = makeTweet({
+      urls: [
+        {
+          display_url: 'jendrikillner.com/post/graphics-…',
+          expanded_url: 'https://www.jendrikillner.com/post/graphics-programming-weekly-issue-291/',
+          indices: [57, 80],
+          url: 'https://t.co/iHrQbSQ9ql',
+        },
+      ],
+      media: [
+        {
+          display_url: 'pic.x.com/RVYpamUM4N',
+          expanded_url: 'https://x.com/jendrikillner/status/1668265685087076356/photo/1',
+          indices: [81, 104],
+          url: 'https://t.co/RVYpamUM4N',
+        },
+      ],
+    })
+
+    const { entities } = enrichTweet(tweet)
+    expect(entities.map((e) => e.type)).toEqual(['text', 'url'])
+    expect(entities[0].text).toBe('Graphics Programming weekly - Issue 291 - June 11th 2023 ')
+    expect(entities[1].text).toBe('jendrikillner.com/post/graphics-…')
+  })
+
+  it('handles a tweet without entities', () => {
+    const { entities } = enrichTweet(makeTweet())
+    expect(entities).toHaveLength(1)
+    expect(entities[0].type).toBe('text')
   })
 })
