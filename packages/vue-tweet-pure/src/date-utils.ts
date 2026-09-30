@@ -1,30 +1,20 @@
-type PartsObject = Record<keyof Intl.DateTimeFormatPartTypesRegistry, string>
-
-const options: Intl.DateTimeFormatOptions = {
+// let each locale order its own time and date parts, e.g.
+// en-US: "10:29 AM · Jan 14, 2023", zh-CN: "10:29 · 2023年1月14日"
+const timeOptions: Intl.DateTimeFormatOptions = {
   hour: 'numeric',
   minute: '2-digit',
-  hour12: true,
-  weekday: 'short',
+}
+
+const dateOptions: Intl.DateTimeFormatOptions = {
   month: 'short',
   day: 'numeric',
   year: 'numeric',
 }
 
-const formatter = new Intl.DateTimeFormat(navigator.language, options)
+const defaultLocale = typeof navigator !== 'undefined' ? navigator.language : 'en-US'
 
-const partsArrayToObject = (parts: ReturnType<typeof formatter.formatToParts>): PartsObject => {
-  const result = {} as PartsObject
-
-  for (const part of parts) {
-    result[part.type] = part.value
-  }
-
-  return result
-}
-
-export const formatDate = (date: Date) => {
-  const parts = partsArrayToObject(formatter.formatToParts(date))
-  const formattedTime = `${parts.hour}:${parts.minute} ${parts.dayPeriod}`
-  const formattedDate = `${parts.month} ${parts.day}, ${parts.year}`
+export const formatDate = (date: Date, locale: string = defaultLocale) => {
+  const formattedTime = new Intl.DateTimeFormat(locale, timeOptions).format(date)
+  const formattedDate = new Intl.DateTimeFormat(locale, dateOptions).format(date)
   return `${formattedTime} · ${formattedDate}`
 }
